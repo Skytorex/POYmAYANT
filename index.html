@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body style="background-image: url(bg.jpg)">
+	<div style="height: 100px; ">
+		<h1>АЧКИ: <span class="score">0</span></h1>
+		<h1>ЖУКИ: <span class="insect">0</span></h1>
+	</div>
+	<button type="button" class="btn btn-secondary" style="display: none">restart</button>
+	<script type="text/javascript">
+		let scores = 0
+		let insects = 0
+		let func = function(arg){
+			let left = Math.random()*arg
+			let roundl = Math.round(left)
+			return roundl
+		}
+		let interv= function(){
+			let newImg = document.createElement("img")
+			newImg.onclick = function(){
+				scores = scores + 1
+				newImg.style.display = "none"
+				document.querySelector(".score").innerHTML = scores;
+			}
+			insects = insects + 1
+			document.querySelector(".insect").innerHTML = insects;
+			document.body.appendChild(newImg);
+			newImg.src = "img.svg"
+			newImg.style.width = "100px"
+			newImg.style.height = "100px"
+			newImg.style.marginLeft = func(1500) + "px"
+			newImg.style.position = "absolute"
+			newImg.style.marginTop = func(600) + "px"
+		}
+		let konec = setInterval(interv,1000)
+		setTimeout(function() {
+		  clearInterval(konec);
+		  document.querySelector(".btn").style.display = "block";
+		  document.querySelector(".btn").onclick = function(){
+		  	location.reload()
+		  }
+		}, 15000);
+		let timer = function(){
+			if ( scores > 10 ) {
+				alert("win")
+			} 
+			else
+				alert("lose")
+		} 
+		setTimeout(timer,15000)
+	</script>
+</body>
+</html>
